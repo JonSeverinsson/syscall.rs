@@ -14,11 +14,14 @@
 #![allow(unused_assignments)]
 #![allow(unused_variables)]
 
+#[cfg_attr(target_pointer_width = "32", path="nr32.rs")]
 pub mod nr;
 
+use super::ureg;
+
 #[inline(always)]
-pub unsafe fn syscall0(mut n: usize) -> usize {
-    let ret: usize;
+pub unsafe fn syscall0(mut n: ureg) -> ureg {
+    let ret: ureg;
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -31,7 +34,7 @@ pub unsafe fn syscall0(mut n: usize) -> usize {
 }
 
 #[inline(always)]
-pub unsafe fn syscall1(mut n: usize, mut a1: usize) -> usize {
+pub unsafe fn syscall1(mut n: ureg, mut a1: ureg) -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -44,7 +47,7 @@ pub unsafe fn syscall1(mut n: usize, mut a1: usize) -> usize {
 }
 
 #[inline(always)]
-pub unsafe fn syscall2(mut n: usize, mut a1: usize, mut a2: usize) -> usize {
+pub unsafe fn syscall2(mut n: ureg, mut a1: ureg, mut a2: ureg) -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -57,11 +60,11 @@ pub unsafe fn syscall2(mut n: usize, mut a1: usize, mut a2: usize) -> usize {
 }
 
 #[inline(always)]
-pub unsafe fn syscall3(mut n: usize,
-                       mut a1: usize,
-                       mut a2: usize,
-                       mut a3: usize)
-                       -> usize {
+pub unsafe fn syscall3(mut n: ureg,
+                       mut a1: ureg,
+                       mut a2: ureg,
+                       mut a3: ureg)
+                       -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -74,12 +77,12 @@ pub unsafe fn syscall3(mut n: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall4(mut n: usize,
-                       mut a1: usize,
-                       mut a2: usize,
-                       mut a3: usize,
-                       mut a4: usize)
-                       -> usize {
+pub unsafe fn syscall4(mut n: ureg,
+                       mut a1: ureg,
+                       mut a2: ureg,
+                       mut a3: ureg,
+                       mut a4: ureg)
+                       -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -92,13 +95,13 @@ pub unsafe fn syscall4(mut n: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall5(mut n: usize,
-                       mut a1: usize,
-                       mut a2: usize,
-                       mut a3: usize,
-                       mut a4: usize,
-                       mut a5: usize)
-                       -> usize {
+pub unsafe fn syscall5(mut n: ureg,
+                       mut a1: ureg,
+                       mut a2: ureg,
+                       mut a3: ureg,
+                       mut a4: ureg,
+                       mut a5: ureg)
+                       -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -112,14 +115,14 @@ pub unsafe fn syscall5(mut n: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall6(mut n: usize,
-                       mut a1: usize,
-                       mut a2: usize,
-                       mut a3: usize,
-                       mut a4: usize,
-                       mut a5: usize,
-                       mut a6: usize)
-                       -> usize {
+pub unsafe fn syscall6(mut n: ureg,
+                       mut a1: ureg,
+                       mut a2: ureg,
+                       mut a3: ureg,
+                       mut a4: ureg,
+                       mut a5: ureg,
+                       mut a6: ureg)
+                       -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1
@@ -133,15 +136,15 @@ pub unsafe fn syscall6(mut n: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall7(mut n: usize,
-                       mut a1: usize,
-                       mut a2: usize,
-                       mut a3: usize,
-                       mut a4: usize,
-                       mut a5: usize,
-                       mut a6: usize,
-                       mut a7: usize)
-                       -> usize {
+pub unsafe fn syscall7(mut n: ureg,
+                       mut a1: ureg,
+                       mut a2: ureg,
+                       mut a3: ureg,
+                       mut a4: ureg,
+                       mut a5: ureg,
+                       mut a6: ureg,
+                       mut a7: ureg)
+                       -> ureg {
     asm!("sc
           bns+ 1f
           neg $1, $1

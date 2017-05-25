@@ -12,10 +12,13 @@
 // Reference:
 // http://math-atlas.sourceforge.net/devel/assembly/abi_sysV_sparc.pdf
 
+#[cfg_attr(target_pointer_width = "32", path="nr32.rs")]
 pub mod nr;
 
+use super::ureg;
+
 #[inline(always)]
-pub unsafe fn syscall0(nr: usize) -> usize {
+pub unsafe fn syscall0(nr: ureg) -> ureg {
     let ret;
     asm!("t 109
           bcc,pt %xcc, 1f
@@ -29,7 +32,7 @@ pub unsafe fn syscall0(nr: usize) -> usize {
 }
 
 #[inline(always)]
-pub unsafe fn syscall1(nr: usize, mut a1: usize) -> usize {
+pub unsafe fn syscall1(nr: ureg, mut a1: ureg) -> ureg {
     asm!("t 109
           bcc,pt %xcc, 1f
           sub %g0, %o0, %o0
@@ -42,7 +45,7 @@ pub unsafe fn syscall1(nr: usize, mut a1: usize) -> usize {
 }
 
 #[inline(always)]
-pub unsafe fn syscall2(nr: usize, mut a1: usize, a2: usize) -> usize {
+pub unsafe fn syscall2(nr: ureg, mut a1: ureg, a2: ureg) -> ureg {
     asm!("t 109
           bcc,pt %xcc, 1f
           sub %g0, %o0, %o0
@@ -55,11 +58,11 @@ pub unsafe fn syscall2(nr: usize, mut a1: usize, a2: usize) -> usize {
 }
 
 #[inline(always)]
-pub unsafe fn syscall3(nr: usize,
-                       mut a1: usize,
-                       a2: usize,
-                       a3: usize)
-                       -> usize {
+pub unsafe fn syscall3(nr: ureg,
+                       mut a1: ureg,
+                       a2: ureg,
+                       a3: ureg)
+                       -> ureg {
     asm!("t 109
           bcc,pt %xcc, 1f
           sub %g0, %o0, %o0
@@ -72,12 +75,12 @@ pub unsafe fn syscall3(nr: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall4(nr: usize,
-                       mut a1: usize,
-                       a2: usize,
-                       a3: usize,
-                       a4: usize)
-                       -> usize {
+pub unsafe fn syscall4(nr: ureg,
+                       mut a1: ureg,
+                       a2: ureg,
+                       a3: ureg,
+                       a4: ureg)
+                       -> ureg {
     asm!("t 109
           bcc,pt %xcc, 1f
           sub %g0, %o0, %o0
@@ -90,13 +93,13 @@ pub unsafe fn syscall4(nr: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall5(nr: usize,
-                       mut a1: usize,
-                       a2: usize,
-                       a3: usize,
-                       a4: usize,
-                       a5: usize)
-                       -> usize {
+pub unsafe fn syscall5(nr: ureg,
+                       mut a1: ureg,
+                       a2: ureg,
+                       a3: ureg,
+                       a4: ureg,
+                       a5: ureg)
+                       -> ureg {
     asm!("t 109
           bcc,pt %xcc, 1f
           sub %g0, %o0, %o0
@@ -109,14 +112,14 @@ pub unsafe fn syscall5(nr: usize,
 }
 
 #[inline(always)]
-pub unsafe fn syscall6(nr: usize,
-                       mut a1: usize,
-                       a2: usize,
-                       a3: usize,
-                       a4: usize,
-                       a5: usize,
-                       a6: usize)
-                       -> usize {
+pub unsafe fn syscall6(nr: ureg,
+                       mut a1: ureg,
+                       a2: ureg,
+                       a3: ureg,
+                       a4: ureg,
+                       a5: ureg,
+                       a6: ureg)
+                       -> ureg {
     asm!("t 109
           bcc,pt %xcc, 1f
           sub %g0, %o0, %o0

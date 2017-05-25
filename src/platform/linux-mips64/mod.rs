@@ -11,11 +11,14 @@
 
 // For more information see src/platform/linux-mips/mod.rs
 
+#[cfg_attr(target_pointer_width = "32", path="nr32.rs")]
 pub mod nr;
 
+use super::{ireg, ureg};
+
 #[inline(always)]
-pub unsafe fn syscall0(mut nr: usize) -> usize {
-    let success: usize;
+pub unsafe fn syscall0(mut nr: ureg) -> ureg {
+    let success: ureg;
     asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          :
@@ -24,13 +27,13 @@ pub unsafe fn syscall0(mut nr: usize) -> usize {
     if success == 0 {
         nr
     } else {
-        -(nr as isize) as usize
+        -(nr as ireg) as ureg
     }
 }
 
 #[inline(always)]
-pub unsafe fn syscall1(mut nr: usize, a1: usize) -> usize {
-    let success: usize;
+pub unsafe fn syscall1(mut nr: ureg, a1: ureg) -> ureg {
+    let success: ureg;
     asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          : "{$4}"(a1)
@@ -39,13 +42,13 @@ pub unsafe fn syscall1(mut nr: usize, a1: usize) -> usize {
     if success == 0 {
         nr
     } else {
-        -(nr as isize) as usize
+        -(nr as ireg) as ureg
     }
 }
 
 #[inline(always)]
-pub unsafe fn syscall2(mut nr: usize, a1: usize, a2: usize) -> usize {
-    let success: usize;
+pub unsafe fn syscall2(mut nr: ureg, a1: ureg, a2: ureg) -> ureg {
+    let success: ureg;
     asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          : "{$4}"(a1) "{$5}"(a2)
@@ -54,17 +57,17 @@ pub unsafe fn syscall2(mut nr: usize, a1: usize, a2: usize) -> usize {
     if success == 0 {
         nr
     } else {
-        -(nr as isize) as usize
+        -(nr as ireg) as ureg
     }
 }
 
 #[inline(always)]
-pub unsafe fn syscall3(mut nr: usize,
-                       a1: usize,
-                       a2: usize,
-                       a3: usize)
-                       -> usize {
-    let success: usize;
+pub unsafe fn syscall3(mut nr: ureg,
+                       a1: ureg,
+                       a2: ureg,
+                       a3: ureg)
+                       -> ureg {
+    let success: ureg;
     asm!("syscall"
          : "+{$2}"(nr) "={$7}"(success)
          : "{$4}"(a1) "{$5}"(a2) "{$6}"(a3)
@@ -73,54 +76,54 @@ pub unsafe fn syscall3(mut nr: usize,
     if success == 0 {
         nr
     } else {
-        -(nr as isize) as usize
+        -(nr as ireg) as ureg
     }
 }
 
 #[inline(always)]
-pub unsafe fn syscall4(mut nr: usize,
-                       a1: usize,
-                       a2: usize,
-                       a3: usize,
-                       mut a4: usize)
-                       -> usize {
+pub unsafe fn syscall4(mut nr: ureg,
+                       a1: ureg,
+                       a2: ureg,
+                       a3: ureg,
+                       mut a4: ureg)
+                       -> ureg {
     asm!("syscall"
          : "+{$2}"(nr) "+{$7}"(a4)
          : "{$4}"(a1) "{$5}"(a2) "{$6}"(a3)
          : "$8" "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
          : "volatile");
-    if a4 == 0 { nr } else { -(nr as isize) as usize }
+    if a4 == 0 { nr } else { -(nr as ireg) as ureg }
 }
 
 #[inline(always)]
-pub unsafe fn syscall5(mut nr: usize,
-                       a1: usize,
-                       a2: usize,
-                       a3: usize,
-                       mut a4: usize,
-                       a5: usize)
-                       -> usize {
+pub unsafe fn syscall5(mut nr: ureg,
+                       a1: ureg,
+                       a2: ureg,
+                       a3: ureg,
+                       mut a4: ureg,
+                       a5: ureg)
+                       -> ureg {
     asm!("syscall"
          : "+{$2}"(nr) "+{$7}"(a4)
          : "{$4}"(a1) "{$5}"(a2) "{$6}"(a3) "{$8}"(a5)
          : "$9" "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
          : "volatile");
-    if a4 == 0 { nr } else { -(nr as isize) as usize }
+    if a4 == 0 { nr } else { -(nr as ireg) as ureg }
 }
 
 #[inline(always)]
-pub unsafe fn syscall6(mut nr: usize,
-                       a1: usize,
-                       a2: usize,
-                       a3: usize,
-                       mut a4: usize,
-                       a5: usize,
-                       a6: usize)
-                       -> usize {
+pub unsafe fn syscall6(mut nr: ureg,
+                       a1: ureg,
+                       a2: ureg,
+                       a3: ureg,
+                       mut a4: ureg,
+                       a5: ureg,
+                       a6: ureg)
+                       -> ureg {
     asm!("syscall"
          : "+{$2}"(nr) "+{$7}"(a4)
          : "{$4}"(a1) "{$5}"(a2) "{$6}"(a3) "{$8}"(a5) "{$9}"(a6)
          : "$10" "$11" "$12" "$13" "$14" "$15" "$24" "$25" "memory"
          : "volatile");
-    if a4 == 0 { nr } else { -(nr as isize) as usize }
+    if a4 == 0 { nr } else { -(nr as ireg) as ureg }
 }
