@@ -320,6 +320,7 @@ pub const SWAPON: usize = 87;
 pub const SYMLINK: usize = 83;
 pub const SYMLINKAT: usize = 331;
 pub const SYNC: usize = 36;
+pub const SYNC_FILE_RANGE2: usize = 341;
 pub const SYNCFS: usize = 373;
 pub const SYSFS: usize = 135;
 pub const SYSINFO: usize = 116;
